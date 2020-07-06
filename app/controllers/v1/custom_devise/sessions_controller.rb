@@ -4,8 +4,6 @@ module V1
       respond_to :json
 
       acts_as_token_authentication_handler_for User, fallback_to_devise: false
-      skip_before_filter :authenticate_entity_from_token!, only: [:create]
-      skip_before_filter :authenticate_entity!, only: [:create]
 
       # POST /users/sign_in
       def create

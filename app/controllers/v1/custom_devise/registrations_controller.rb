@@ -6,16 +6,13 @@ module V1
 
       acts_as_token_authentication_handler_for User
 
-      skip_before_filter :authenticate_entity_from_token!, only: [:create]
-      skip_before_filter :authenticate_entity!, only: [:create]
-
-      skip_before_filter :authenticate_scope!
-      append_before_filter :authenticate_scope!, only: [:destroy]
+      skip_before_action :authenticate_scope!
+      append_before_action :authenticate_scope!, only: [:destroy]
 
 
       # POST /users
       def create
-        build_resource(param_keys_to_snake_case(sign_up_params))
+        build_resource(sign_up_params)
 
         if resource.save
           sign_up(resource_name, resource)
@@ -27,7 +24,7 @@ module V1
       end
 
 
-      # DELETE /users/UUID
+      # DELETE /users/id
       def destroy
         resource.deactivated_at = DateTime.now
         resource.save!
@@ -37,7 +34,7 @@ module V1
       private
 
       def sign_up_params
-        params.fetch(:user).permit([:password, :password_confirmation, :email])
+        params.require(:user).permit([:password, :password_confirmation, :email])
       end
 
     end
