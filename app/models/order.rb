@@ -12,13 +12,13 @@ class Order < ApplicationRecord
 
   def check_order_status
     if self.status == "ORDER_SHIPPED"
-      raise StandardError, {'detail': 'Operation not completed, the order has already been shipped.'}
+      raise "Operation not completed, the order has already been shipped."
     end
   end
 
   def check_recipients_size
     if self.recipients.size > 20
-      raise StandardError, {'detail': 'Operation not completed, recipients should be 20 at most.'}
+      raise "Operation not completed, recipients should be 20 at most."
     end
   end
 
@@ -29,7 +29,7 @@ class Order < ApplicationRecord
     end
 
     if gifts_today > 3
-      raise StandardError, {'detail': 'Operation not completed, gifts per day limit reached (60).'}
+      raise "Operation not completed, gifts per day limit reached (60)."
     end
   end
 end
