@@ -6,9 +6,9 @@ class Order < ApplicationRecord
   validates :recipients, :presence => true
   validates :gifts, :presence => true
 
-  validate :check_order_status
-  validate :check_recipients_size
-  validate :check_gifts_for_shool_today
+  validate :check_order_status, on: [:update]
+  validate :check_recipients_size, on: [:create, :update]
+  validate :check_gifts_for_shool_today, on: [:create, :update]
 
   def check_order_status
     if self.status == "ORDER_SHIPPED"
