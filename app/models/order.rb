@@ -28,7 +28,7 @@ class Order < ApplicationRecord
       gifts_today += order.gifts.size
     end
 
-    if gifts_today > 3
+    if gifts_today > 60
       self.errors.add(:base, "Operation not completed, gifts per day limit reached (60).")
     end
   end
