@@ -24,7 +24,9 @@ You can use postman to do all the requests and in the url you can either use it 
 In the documentation I will be using the endpoints from the API deployed in heroku. I you want to run them locally just change the url to localhost:3000
 
 # API Documentation
-In each call we need to pass an authentication token and user email to be able to use all the features. In the postman collection that I provided via email to you is the auth token and the email for you to use in postman with all endpoints.
+In each call we need to pass an authentication token and user email to be able to use all the features. In the postman collection that I have provided here is the auth token and the email for you to use in postman with all endpoints.
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/46b67fc2e5a4e40d3eff)
 
 - Create School
 `https://thrillshare-apptegy.herokuapp.com/v1/schools`
