@@ -6,19 +6,19 @@ class Order < ApplicationRecord
   validates :recipients, :presence => true
   validates :gifts, :presence => true
 
-  before_update :check_order_status
-  before_commit :check_recipients_size
-  before_commit :check_gifts_for_shool_today
+  validate :check_order_status
+  validate :check_recipients_size
+  validate :check_gifts_for_shool_today
 
   def check_order_status
     if self.status == "ORDER_SHIPPED"
-      raise "Operation not completed, the order has already been shipped."
+      self.errors.add(:base, "Operation not completed, the order has already been shipped.")
     end
   end
 
   def check_recipients_size
     if self.recipients.size > 20
-      raise "Operation not completed, recipients should be 20 at most."
+      self.errors.add(:base, "Operation not completed, recipients should be 20 at most.")
     end
   end
 
@@ -29,7 +29,7 @@ class Order < ApplicationRecord
     end
 
     if gifts_today > 3
-      raise "Operation not completed, gifts per day limit reached (60)."
+      self.errors.add(:base, "Operation not completed, gifts per day limit reached (60).")
     end
   end
 end
